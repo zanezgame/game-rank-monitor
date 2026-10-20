@@ -215,8 +215,8 @@ onMounted(() => {
       </div>
 
       <!-- 榜单表格 -->
-      <div v-else class="card" style="padding: 8px 12px">
-        <p class="muted" style="margin: 8px 4px">
+      <div v-else class="card chart-card">
+        <p class="chart-meta">
           {{ currentPlatform?.name }} · {{ regionLabel }} ·
           {{ chartType === "hot" ? "热门榜" : "新游榜" }} ·
           {{ period === "daily" ? "每日" : "每周" }} ·

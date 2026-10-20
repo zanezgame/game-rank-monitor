@@ -110,6 +110,9 @@ async function loadTrends(): Promise<void> {
     if (gameId.value !== id) return;
     ranks.value = r;
     players.value = p;
+    // 必须先关掉加载态：图表容器只在非加载态才渲染，
+    // 否则 nextTick 后 ref 仍为空，图表永远画不出来
+    trendsLoading.value = false;
     await nextTick();
     renderRankChart();
     renderPlayerChart();
@@ -153,8 +156,9 @@ function renderRankChart(): void {
         symbol: "circle",
         symbolSize: 6,
         data: data.map((d) => d.rank),
-        lineStyle: { width: 2.5 },
-        areaStyle: { opacity: 0.08 },
+        lineStyle: { width: 2.5, color: "#2563eb" },
+        itemStyle: { color: "#2563eb" },
+        areaStyle: { opacity: 0.08, color: "#2563eb" },
       },
     ],
   });
@@ -241,7 +245,7 @@ onBeforeUnmount(() => {
     <!-- 趋势区 -->
     <div class="card">
       <div class="toolbar">
-        <h2 class="page-title">排名走势</h2>
+        <h2 class="section-title">排名走势</h2>
         <span class="spacer"></span>
         <div class="seg" aria-label="天数">
           <button :class="{ active: trendDays === 7 }" @click="trendDays = 7">近 7 天</button>
@@ -255,7 +259,7 @@ onBeforeUnmount(() => {
         <div v-if="ranks.length === 0" class="empty">暂无排名历史数据。</div>
         <div v-else ref="rankChartEl" class="chart-box"></div>
 
-        <h2 class="page-title mt-8">在线人数</h2>
+        <h2 class="section-title mt-8">在线人数</h2>
         <div v-if="players.length === 0" class="empty">该平台无公开人数数据。</div>
         <div v-else ref="playerChartEl" class="chart-box"></div>
       </template>
@@ -263,7 +267,7 @@ onBeforeUnmount(() => {
 
     <!-- 上榜理由时间线 -->
     <div class="card">
-      <h2 class="page-title">上榜理由时间线</h2>
+      <h2 class="section-title">上榜理由时间线</h2>
       <div v-if="trendsLoading" class="loading"><span class="spinner"></span>加载中…</div>
       <div v-else-if="timeline.length === 0" class="empty">暂无上榜记录。</div>
       <ul v-else class="timeline">
@@ -278,7 +282,7 @@ onBeforeUnmount(() => {
 
     <!-- 玩家讨论 -->
     <div class="card">
-      <h2 class="page-title">玩家讨论</h2>
+      <h2 class="section-title">玩家讨论</h2>
       <div v-if="discussionsLoading" class="loading"><span class="spinner"></span>讨论加载中…</div>
       <div v-else-if="discussions.length === 0" class="empty">暂无玩家讨论数据。</div>
       <div v-else>

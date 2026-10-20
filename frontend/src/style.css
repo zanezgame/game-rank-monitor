@@ -1,19 +1,19 @@
 /* 全局样式：浅色简洁风，中文界面 */
 
 :root {
-  --bg: #f5f7fa;
+  --bg: #f6f7f9;
   --card: #ffffff;
-  --text: #1f2937;
-  --text-muted: #6b7280;
-  --border: #e5e7eb;
+  --text: #1c2430;
+  --text-muted: #68707d;
+  --border: #e6e9ee;
   --primary: #2563eb;
   --primary-dark: #1d4ed8;
   --green: #16a34a;
   --red: #dc2626;
   --orange: #ea580c;
   --purple: #7c3aed;
-  --radius: 10px;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --radius: 14px;
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 4px 16px rgba(16, 24, 40, 0.05);
 }
 
 * {
@@ -33,6 +33,12 @@ body {
   color: var(--text);
   font-size: 14px;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #dbeafe;
 }
 
 a {
@@ -45,9 +51,9 @@ a:hover {
 
 /* ---------- 布局 ---------- */
 .container {
-  max-width: 1200px;
+  max-width: 1160px;
   margin: 0 auto;
-  padding: 20px 16px 48px;
+  padding: 28px 20px 56px;
 }
 
 .card {
@@ -55,18 +61,27 @@ a:hover {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 20px;
-  margin-bottom: 16px;
+  padding: 22px 24px;
+  margin-bottom: 18px;
 }
 
 .page-title {
-  margin: 0 0 4px;
-  font-size: 20px;
+  margin: 0 0 6px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 .page-desc {
-  margin: 0 0 16px;
+  margin: 0 0 20px;
   color: var(--text-muted);
   font-size: 13px;
+}
+/* 卡片内小节标题（详情页各区块） */
+.section-title {
+  margin: 0 0 10px;
+  font-size: 16px;
+  font-weight: 650;
+  letter-spacing: -0.005em;
 }
 
 /* ---------- 表单控件 ---------- */
@@ -76,15 +91,20 @@ a:hover {
   gap: 6px;
   padding: 8px 16px;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
   background: var(--card);
   color: var(--text);
   font-size: 14px;
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
 }
 .btn:hover:not(:disabled) {
   background: #f3f4f6;
+}
+.btn:focus-visible {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
 }
 .btn:disabled {
   opacity: 0.55;
@@ -94,6 +114,7 @@ a:hover {
   background: var(--primary);
   border-color: var(--primary);
   color: #fff;
+  box-shadow: 0 1px 2px rgba(37, 99, 235, 0.3);
 }
 .btn-primary:hover:not(:disabled) {
   background: var(--primary-dark);
@@ -101,8 +122,8 @@ a:hover {
 
 .seg {
   display: inline-flex;
-  background: #eef1f6;
-  border-radius: 8px;
+  background: #edf0f4;
+  border-radius: 10px;
   padding: 3px;
   gap: 2px;
 }
@@ -110,16 +131,17 @@ a:hover {
   border: 0;
   background: transparent;
   padding: 6px 14px;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 13px;
   cursor: pointer;
   color: var(--text-muted);
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
 }
 .seg button.active {
   background: #fff;
   color: var(--text);
   font-weight: 600;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(16, 24, 40, 0.12);
 }
 .seg button:disabled {
   opacity: 0.45;
@@ -129,18 +151,24 @@ a:hover {
 .input-date {
   padding: 7px 10px;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 13px;
   color: var(--text);
   background: #fff;
+}
+.input-date:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 /* ---------- 徽标 ---------- */
 .badge {
   display: inline-block;
-  padding: 2px 10px;
+  padding: 3px 10px;
   border-radius: 999px;
   font-size: 12px;
+  font-weight: 500;
   white-space: nowrap;
 }
 .badge-blue {
@@ -170,13 +198,13 @@ a:hover {
 
 .tag {
   display: inline-block;
-  padding: 1px 8px;
+  padding: 2px 9px;
   margin: 1px 3px 1px 0;
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 999px;
   font-size: 12px;
   color: var(--text-muted);
-  background: #fafbfc;
+  background: #f7f8fa;
 }
 
 /* ---------- 排名升降 ---------- */
@@ -205,39 +233,54 @@ table.chart-table {
 }
 .chart-table th,
 .chart-table td {
-  padding: 10px 12px;
-  border-bottom: 1px solid var(--border);
+  padding: 12px 14px;
+  border-bottom: 1px solid #eef0f3;
   text-align: left;
   vertical-align: middle;
 }
 .chart-table th {
   color: var(--text-muted);
   font-weight: 500;
-  font-size: 13px;
+  font-size: 12px;
+  letter-spacing: 0.04em;
   white-space: nowrap;
+  background: #fafbfc;
+  border-bottom: 1px solid var(--border);
+}
+.chart-table tbody tr {
+  transition: background 0.12s;
 }
 .chart-table tbody tr:hover {
-  background: #f9fafb;
+  background: #f8fafc;
+}
+.chart-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.chart-table td:last-child {
+  font-variant-numeric: tabular-nums;
 }
 .rank-num {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  background: #f3f4f6;
-  font-weight: 700;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 6px;
+  border-radius: 9px;
+  background: #f1f4f8;
+  color: #4b5563;
+  font-weight: 600;
+  font-size: 13.5px;
   font-variant-numeric: tabular-nums;
 }
-.rank-num.top1 { background: #fef3c7; color: #b45309; }
-.rank-num.top2 { background: #e2e8f0; color: #475569; }
-.rank-num.top3 { background: #ffedd5; color: #c2410c; }
+.rank-num.top1 { background: linear-gradient(135deg, #fde68a, #fcd34d); color: #92400e; }
+.rank-num.top2 { background: linear-gradient(135deg, #e5e7eb, #cbd5e1); color: #475569; }
+.rank-num.top3 { background: linear-gradient(135deg, #fed7aa, #fdba74); color: #9a3412; }
 
 .game-cell {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 .game-name {
   font-weight: 600;
@@ -250,7 +293,7 @@ a .game-name:hover {
 /* ---------- 状态提示 ---------- */
 .notice {
   padding: 12px 16px;
-  border-radius: 8px;
+  border-radius: 12px;
   margin-bottom: 16px;
   font-size: 13px;
 }
@@ -299,16 +342,18 @@ a .game-name:hover {
 
 /* ---------- 顶栏 ---------- */
 .topbar {
-  background: var(--card);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: saturate(1.4) blur(10px);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 10;
 }
 .topbar-inner {
-  max-width: 1200px;
+  max-width: 1160px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 20px;
   height: 56px;
   display: flex;
   align-items: center;
@@ -317,6 +362,7 @@ a .game-name:hover {
 .brand {
   font-size: 16px;
   font-weight: 700;
+  letter-spacing: -0.01em;
   color: var(--text);
   white-space: nowrap;
 }
@@ -326,9 +372,10 @@ a .game-name:hover {
 }
 .nav a {
   padding: 8px 14px;
-  border-radius: 8px;
+  border-radius: 9px;
   color: var(--text-muted);
   font-size: 14px;
+  transition: background 0.15s, color 0.15s;
 }
 .nav a:hover {
   background: #f3f4f6;
@@ -337,7 +384,7 @@ a .game-name:hover {
 .nav a.router-link-active {
   color: var(--primary);
   font-weight: 600;
-  background: #eff6ff;
+  background: #eaf1fe;
 }
 
 /* ---------- 详情页 ---------- */
@@ -448,3 +495,47 @@ a .game-name:hover {
   font-size: 13px;
 }
 .mt-8 { margin-top: 8px; }
+
+/* ---------- 榜单卡片 ---------- */
+.chart-card {
+  padding: 10px 18px 14px;
+}
+.chart-meta {
+  margin: 10px 2px 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.toolbar .section-title {
+  margin: 0;
+}
+
+/* ---------- 小屏适配 ---------- */
+@media (max-width: 720px) {
+  .container {
+    padding: 18px 12px 40px;
+  }
+  .card {
+    padding: 18px 16px;
+  }
+  .chart-card {
+    padding: 8px 10px 10px;
+  }
+  .topbar-inner {
+    padding: 0 12px;
+    gap: 12px;
+  }
+  .brand {
+    font-size: 15px;
+  }
+  .detail-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .chart-table th,
+  .chart-table td {
+    padding: 9px 10px;
+  }
+  table.chart-table {
+    font-size: 13px;
+  }
+}

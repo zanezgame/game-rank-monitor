@@ -63,10 +63,12 @@ const boxStyle = computed(() => ({
 
 <style scoped>
 .game-icon {
-  border-radius: 8px;
+  border-radius: 10px;
   object-fit: cover;
   flex-shrink: 0;
   display: block;
+  background: #eef1f5;
+  box-shadow: inset 0 0 0 1px rgba(16, 24, 40, 0.05);
 }
 .game-icon-fallback {
   display: inline-flex;
