@@ -1,0 +1,18 @@
+[Unit]
+Description=游戏榜单监控平台后端 (gamerank-server)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=gamerank
+Group=gamerank
+WorkingDirectory=/opt/gamerank/backend
+ExecStart=/opt/gamerank/bin/gamerank-server -addr :8080 -db /opt/gamerank/backend/data/gamerank.db
+Restart=always
+RestartSec=5
+# 采集为礼貌模式（单线程、间隔 2s+），资源占用很小
+MemoryMax=512M
+
+[Install]
+WantedBy=multi-user.target

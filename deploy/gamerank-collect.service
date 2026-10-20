@@ -1,0 +1,14 @@
+[Unit]
+Description=游戏榜单日榜采集（一次性）
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=gamerank
+Group=gamerank
+WorkingDirectory=/opt/gamerank/backend
+ExecStart=/opt/gamerank/bin/gamerank-server -collect -db /opt/gamerank/backend/data/gamerank.db
+# 日志按天落盘，便于排查
+StandardOutput=append:/opt/gamerank/backend/data/logs/collect-%Y%m%d.log
+StandardError=inherit

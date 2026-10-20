@@ -1,0 +1,11 @@
+[Unit]
+Description=每天 02:10 采集游戏日榜（北京时间）
+
+[Timer]
+# 服务器时区由 remote-deploy.sh 设为 Asia/Shanghai，此处即北京时间
+OnCalendar=*-*-* 02:10:00
+Persistent=true
+Unit=gamerank-collect.service
+
+[Install]
+WantedBy=timers.target

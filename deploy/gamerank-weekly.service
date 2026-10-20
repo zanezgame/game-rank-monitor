@@ -1,0 +1,13 @@
+[Unit]
+Description=游戏榜单周榜聚合（一次性）
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=gamerank
+Group=gamerank
+WorkingDirectory=/opt/gamerank/backend
+ExecStart=/opt/gamerank/bin/gamerank-server -weekly -db /opt/gamerank/backend/data/gamerank.db
+StandardOutput=append:/opt/gamerank/backend/data/logs/weekly-%Y%m%d.log
+StandardError=inherit

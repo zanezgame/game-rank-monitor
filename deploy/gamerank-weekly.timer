@@ -1,0 +1,11 @@
+[Unit]
+Description=每周一 03:00 聚合游戏周榜（北京时间）
+
+[Timer]
+# 服务器时区由 remote-deploy.sh 设为 Asia/Shanghai，此处即北京时间
+OnCalendar=Mon *-*-* 03:00:00
+Persistent=true
+Unit=gamerank-weekly.service
+
+[Install]
+WantedBy=timers.target
